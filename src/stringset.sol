@@ -18,5 +18,28 @@ library StringSet {
             return false;
         }
     }
-    
+
+    function remove(Set storage set, string memory value) internal returns (bool) {
+        uint256 position = set._positions[value];
+
+        if (position != 0) {
+            uint256 valueIndex = position - 1;
+            uint256 lastIndex = set._values.length - 1;
+
+            if (valueIndex != lastIndex) {
+                string memory lastValue = set._values[lastIndex];
+
+                set._values[valueIndex] = lastValue;
+                set._positions[lastValue] = position;
+            }
+
+            set._values.pop();
+
+            delete set._positions[value];
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
