@@ -42,4 +42,20 @@ library StringSet {
             return false;
         }
     }
+
+    function contains(Set storage set, string memory value) internal view returns (bool) {
+        return set._positions[value] != 0;
+    }
+
+    function length(Set storage set) internal view returns (uint256) {
+        return set._values.length;
+    }
+
+    function at(Set storage set, uint256 index) internal view returns (string memory) {
+        return set._values[index];
+    }
+
+    function values(Set storage set) internal view returns (string[] memory) {
+        return set._values;
+    }
 }
