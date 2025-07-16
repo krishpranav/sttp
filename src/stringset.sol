@@ -4,7 +4,6 @@ pragma solidity ^0.8.1;
 library StringSet {
     struct Set {
         string[] _values;
-
         mapping(string value => uint256) _positions;
     }
 
