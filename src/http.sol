@@ -75,4 +75,11 @@ library HTTP {
         return POST(withUrl(req, url));
     }
 
+    function PUT(HTTP.Request storage req) internal returns (HTTP.Request storage) {
+        return withMethod(req, HTTP.Method.PUT);
+    }
+
+    function PUT(HTTP.Request storage req, string memory url) internal returns (HTTP.Request storage) {
+        return PUT(withUrl(req, url));
+    }
 }
