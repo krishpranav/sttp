@@ -82,4 +82,20 @@ library HTTP {
     function PUT(HTTP.Request storage req, string memory url) internal returns (HTTP.Request storage) {
         return PUT(withUrl(req, url));
     }
+
+    function toString(Method method) internal pure returns (string memory) {
+        if (method == Method.GET) {
+            return "GET";
+        } else if (method == Method.POST) {
+            return "POST";
+        } else if (method == Method.PUT) {
+            return "PUT";
+        } else if (method == Method.DELETE) {
+            return "DELETE";
+        } else if (method == Method.PATCH) {
+            return "PATCH";
+        } else {
+            revert();
+        }
+    }
 }
