@@ -40,4 +40,39 @@ library HTTP {
         client.requests.push();
         return client.requests[client.requests.length - 1];
     }
+
+    function initialize(HTTP.Client storage client, string memory url) internal returns (HTTP.Request storage) {
+        return withUrl(initialize(client), url);
+    }
+
+    function instance(HTTP.Client storage client) internal view returns (HTTP.Request storage) {
+        return client.requests[client.requests.length - 1];
+    }
+
+    function withUrl(HTTP.Request storage req, string memory url) internal returns (HTTP.Request storage) {
+        req.url = url;
+        return req;
+    }
+
+    function withMethod(HTTP.Request storage req, HTTP.Method method) internal returns (HTTP.Request storage) {
+        req.method = method;
+        return req;
+    }
+
+    function GET(HTTP.Request storage req) internal returns (HTTP.Request storage) {
+        return withBody(withMethod(req, HTTP.Method.GET), "");
+    }
+
+    function GET(HTTP.Request storage req, string memory url) internal returns (HTTP.Request storage) {
+        return GET(withUrl(req, url));
+    }
+
+    function POST(HTTP.Request storage req) internal returns (HTTP.Request storage) {
+        return withMethod(req, HTTP.Method.POST);
+    }
+
+    function POST(HTTP.Request storage req, string memory url) internal returns (HTTP.Request storage) {
+        return POST(withUrl(req, url));
+    }
+
 }
